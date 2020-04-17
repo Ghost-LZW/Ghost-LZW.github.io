@@ -1,0 +1,349 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Floating-Point Numbers题解 | 蓝灵博客</title>
+  <meta name="author" content="Ghost_LZW">
+  
+  <meta name="description" content="Floating-Point Numbers的真·暴力与暴力解法">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Floating-Point Numbers题解"/>
+  <meta property="og:site_name" content="蓝灵博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="蓝灵博客" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-134518650-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f5b3b5dfc13e08e896e4bd5b5f03ab28";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">蓝灵博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Floating-Point Numbers题解</h1>
+		</div>
+	
+
+
+
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+			tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+			TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+			messageStyle: "none"
+	}); 
+</script>
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Queue(function() {
+			var all = MathJax.Hub.getAllJax(), i;
+			for(i=0; i < all.length; i += 1) {
+					all[i].SourceElement().parentNode.className += ' has-jax';
+			}
+	});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async>
+</script>
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> Floating-Point Numbers的真·暴力与暴力解法
+		 </div> <!-- alert -->
+	  		
+
+	  <p>紫书第三章最后一道，，，自从寒假就没碰紫书的题，，现在补一下，，</p>
+<a id="more"></a>
+
+<p>Floating-Point Numbers<br><a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2909" target="_blank" rel="noopener">UVA - 11809</a></p>
+<p>题意：你以为我是模拟？？其实我是数学题哒！给你一个用科学计数法表示的数字，让你计算在内存中以浮点数储存时占据的尾速部分和指数部分的位数；</p>
+<p>题解：我们要求的时位数占位M，和指数占位E<br>M能表示的最大尾数为： $a = 2^{-1} + 2^{-2} + … + 2^{-m-1}$<br>可以处理为：$a = 1 - 2^{-m-1}$<br>E能表示的最大阶乘：$b = 2^{2^E - 1}$</p>
+<p>所以： $$a * 2^b = A * 10^B$$</p>
+<p>而且这道题的m和e的范围非常小；<br>可以打表然后判断解决；</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> Min = <span class="number">1e-5</span>;</span><br><span class="line"><span class="keyword">double</span> lis[<span class="number">10</span>][<span class="number">31</span>];</span><br><span class="line">ll jie[<span class="number">10</span>][<span class="number">31</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dab</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> m = <span class="number">0</span>; m &lt; <span class="number">10</span>; m++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> e = <span class="number">1</span>; e &lt; <span class="number">31</span>; e++)&#123;</span><br><span class="line">            <span class="keyword">double</span> a = <span class="number">1.0</span> - <span class="built_in">pow</span>(<span class="number">2.0</span>, <span class="number">-1.0</span>*m<span class="number">-1.0</span>);</span><br><span class="line">            <span class="keyword">double</span> b = <span class="built_in">pow</span>(<span class="number">2.0</span>, e) - <span class="number">1.0</span>;</span><br><span class="line">            jie[m][e] = <span class="built_in">floor</span>(<span class="built_in">log10</span>(a) + b * <span class="built_in">log10</span>(<span class="number">2</span>));</span><br><span class="line">            lis[m][e] = <span class="built_in">pow</span>(<span class="number">10</span>, <span class="built_in">log10</span>(a) + b * <span class="built_in">log10</span>(<span class="number">2</span>) - <span class="number">1.0</span>*jie[m][e]);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    dab();</span><br><span class="line">    <span class="keyword">double</span> a;</span><br><span class="line">    ll b;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%17lfe%lld"</span>, &amp;a, &amp;b) &amp;&amp; a &gt; Min)&#123;</span><br><span class="line">        <span class="keyword">int</span> m, e;</span><br><span class="line">        <span class="keyword">for</span>(e = <span class="number">1</span>; e &lt; <span class="number">31</span>; e++)</span><br><span class="line">            <span class="keyword">for</span>(m = <span class="number">9</span>; m &gt;= <span class="number">0</span>; m--)</span><br><span class="line">                <span class="keyword">if</span>(b == jie[m][e] &amp;&amp; <span class="built_in">fabs</span>(lis[m][e] - a) &lt; Min)<span class="keyword">goto</span> out;</span><br><span class="line">        out: <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, m, e);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但如果想要更加暴力呢？<br>当然是可以的，直接算出答案，模糊判断输入数据AeB的M和E，直接输出M和E；<br>就是误差控制不好控制，，要优化减小误差，同时考虑误差，wa了好多次，，</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> Min = <span class="number">1e-6</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%17lfe%d"</span>, &amp;a, &amp;b) &amp;&amp; (a &gt; Min || b))&#123;</span><br><span class="line">        <span class="keyword">if</span>(a &lt; Min)<span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">double</span> d = <span class="built_in">ceil</span>((b + <span class="built_in">log10</span>(a)) / <span class="built_in">log10</span>(<span class="number">2</span>) + <span class="number">1e-4</span>);</span><br><span class="line">        <span class="keyword">double</span> e = <span class="built_in">ceil</span>(log2(d + <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">double</span> c = <span class="built_in">pow</span>(<span class="number">2</span>, (b + <span class="built_in">log10</span>(a)) / <span class="built_in">log10</span>(<span class="number">2</span>) - d);</span><br><span class="line">        <span class="keyword">double</span> m = <span class="built_in">abs</span>(<span class="built_in">ceil</span>(-log2(<span class="number">1</span> - c) <span class="number">-1</span> - <span class="number">1e-4</span>));</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%.0lf %.0lf\n"</span>, m, e);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2019/03/09/从零到花式求解逆元/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/02/28/SDNU-ACM-ICPC-2019-Winter-Practice-5th题解报告/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-02-28 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/problem-solve/">题解<span>14</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/code/">code<span>19</span></a></li> <li><a href="/tags/moni/">模拟<span>2</span></a></li> <li><a href="/tags/math/">math<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+
+	<div id="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#comment' ,
+        notify:true, 
+        verify:true, 
+        appId: 'mpYG5gk3zUSGLHSmW2YgT3oA-gzGzoHsz',
+        appKey: 'vV040gPRCKgVKVH5niloUksW',
+        placeholder: '评论一下再走嘛o(*￣▽￣*)ブ',
+        path:window.location.pathname, 
+        avatar:'mm',
+        visitor:true
+    });
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            if (!email.value || !nick.value) {
+                const str = `<div class="valert txt-center"><div class="vtext">请填写昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+        });
+    </script>
+	
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2020 Ghost_LZW
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'BDeNfFwDjzz41GphGyrf','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

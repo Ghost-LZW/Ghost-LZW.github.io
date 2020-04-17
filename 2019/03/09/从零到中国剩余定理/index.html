@@ -1,0 +1,403 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>从零到中国剩余定理 | 蓝灵博客</title>
+  <meta name="author" content="Ghost_LZW">
+  
+  <meta name="description" content="数论小知识总结.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="从零到中国剩余定理"/>
+  <meta property="og:site_name" content="蓝灵博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="蓝灵博客" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-134518650-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f5b3b5dfc13e08e896e4bd5b5f03ab28";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">蓝灵博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 从零到中国剩余定理</h1>
+		</div>
+	
+
+
+
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+			tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+			TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+			messageStyle: "none"
+	}); 
+</script>
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Queue(function() {
+			var all = MathJax.Hub.getAllJax(), i;
+			for(i=0; i < all.length; i += 1) {
+					all[i].SourceElement().parentNode.className += ' has-jax';
+			}
+	});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async>
+</script>
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> 数论小知识总结.
+		 </div> <!-- alert -->
+	  		
+
+	  <p>数论小课堂开课了，孩子上课听不懂，多半是零基础；</p>
+<p>在Forsaken和Google的帮助下，让我实现了从零到中国剩余定理，在这里记录一下；</p>
+<a id="more"></a>
+<p>要了解中国剩余定理，先要知道扩展欧几里得，之前又要了解欧几里得算法才能推导出扩展欧几里得，好不容易推导出扩展欧几里得，发现他还可以用来求逆元，那还说什么，赶紧把逆元也总结一波；</p>
+<p>所以本文将从欧几里得开始，经过乘法逆元的小插曲，到最终的扩展中国定理；<br>作为初学者，本文将从最基础记录我的学习过程，本文面向对象也是初学者，（dalao也不会来看，，，如果有幸被看到欢迎指导；</p>
+<h1 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h1><p>欧几里得算法是用来计算最大公约数（greatest common divisor）的一个算法，简称GCD；</p>
+<p>古时候人们用辗转相减法求最大公因数，也就是设a &gt; b（后文无特别说明皆为如此）, $gcd(a, b) == gcd(a - b, b)$， 简单证明如下:</p>
+<p>设$c = gcd(a, b)$， 那么$c | a$, $c | b$, $a = d * c$, b = e * c$, $a - b = (d - e) * c$, 所以$c | (a - b)$;</p>
+<p>同理，$gcd(a, b) == gcd(a - 2 * b, b)$;</p>
+<p>那么我们升级到辗转相除法:</p>
+<p>$$gcd(a, b) == gcd(b, a \quad mod \quad b) $$</p>
+<p>当一个数变为0时，任何数乘以0都得0， 而另一个数字的最大约数就为另一个数字，显然，此时另一个数字就为最大公约数；</p>
+<p>代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> b == <span class="number">0</span> ? a : gcd(b, a % b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用gcd求最小公倍数"><a href="#用gcd求最小公倍数" class="headerlink" title="用gcd求最小公倍数"></a>用gcd求最小公倍数</h2><p>a和b的最小公倍数（Least Common Multiple）求解：<br>$$lcm(a, b) == (a * b) / gcd(a, b)$$</p>
+<p>直观理解就是除去两个数的相同因子；</p>
+<p>代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcm</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a * b) / gcd(a, b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="裴蜀定理"><a href="#裴蜀定理" class="headerlink" title="裴蜀定理"></a>裴蜀定理</h1><p>在数论中，裴蜀定理是一个关于最大公约数（或最大公约式）的定理。裴蜀定理得名于法国数学家艾蒂安·裴蜀，说明了对任何整数a、b和它们的最大公约数d，关于未知数x和y的线性丢番图方程（称为裴蜀等式）：</p>
+<p>$$ax + by = m$$</p>
+<p>有解当且仅当m是d的倍数。裴蜀等式有解时必然有无穷多个整数解，每组解x、y都称为裴蜀数，可用辗转相除法求得。<br>摘自维基百科；</p>
+<p>翻译一下就是当$gcd(a, b) | c$时， 方程才有整数解；<br>简单证明： 若存在整数解gcd(a, b) | (ax + by)， 那么gcd(a, b) | m；</p>
+<p>那么当gcd(a, b) | m时是否必然有整数解呢？？让扩展欧几里得为我们解答并解出一组x, y;</p>
+<h1 id="拓展欧几里得算法"><a href="#拓展欧几里得算法" class="headerlink" title="拓展欧几里得算法"></a>拓展欧几里得算法</h1><p>将问题简化为<br>$$ax + by = gcd(a, b)$$<br>因为gcd(a, b) == gcd(b, a % b);<br>我们可以得到$ bx’ + (a mod b)y’ = ax + by $;<br>如此递归下去，当$y’$系数为0时， 我们得到$x’$的系数为gcd(a, b), 此时$x’ == 1$, $(a \quad mod \quad b)y’ == 0$, 此时$y’ == 0$;</p>
+<p>我们往回推导x和y， 将a mod b表示为$a - ⌊ a / b ⌋ * b$</p>
+<p>我们得到$a * y’ + b * (x’ - ⌊ a / b ⌋ * y’) = ax + by$;</p>
+<p>通过待定系数法， $x = y’$, $y = x’ - ⌊ a / b ⌋ * y’$;</p>
+<p>可得整数解x, y;<br>再乘以m / gcd(a, b)即可得原问题一组解；<br>再次证明裴蜀定理的同时得到了答案；</p>
+<p>代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ex_gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> s, <span class="keyword">int</span> &amp;x, <span class="keyword">int</span> &amp;y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> x = s / a, y = <span class="number">0</span>, a;</span><br><span class="line">    <span class="keyword">int</span> g = ex_gcd(b, a % b, y, x);</span><br><span class="line">    y -= a / b * x;</span><br><span class="line">    <span class="keyword">return</span> g;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="中国剩余定理（孙子定理）"><a href="#中国剩余定理（孙子定理）" class="headerlink" title="中国剩余定理（孙子定理）"></a>中国剩余定理（孙子定理）</h1><p>ex欧几里得面对ax ≡ b(mod m)时(当b变为1时你是不是想到了乘法逆元？？<a href="../从零到花式求解逆元">快来看</a>)<br>转化为ax + my = b便可求解；<br>而中国剩余定理时用于求解同余方程组的解， 便将用到ec_gcd；</p>
+<p>$$\begin{equation} \left \lbrace \begin{array}<br>&amp;  x \equiv a_1 (mod \quad m_1)<br>\\ x \equiv a_2 (mod \quad m_2) \end{array} \right . \end{equation} $$</p>
+<p>等价于</p>
+<p>$$ \begin{equation} \left \lbrace \begin{array}<br>&amp;  x = a_1 + k_1 * m_1<br>&amp; \\ x = a_2 + k_2 * m_2<br> &amp;<br>\end{array} \right . \end{equation} $$</p>
+<p>联立求解后得</p>
+<p>$$ a_1 + k_1 * m_1 = x = a_2 + k_2 * m_2 $$</p>
+<p>我们先假设$gcd(m_1, m_2) == 1$<br>我们可以用ex_gcd求得一组(k_1’, k_2’)<br>此时回代得x设为$x_0$；</p>
+<p>得到所有整数解：<br>$$ \begin{equation} \left \lbrace \begin{array}<br>   kk_1 = m_2 * t + k_1’<br>&amp; \\ k_2 = m_1 * t + k_2’<br> &amp;<br>\end{array} \right . \end{equation} $$</p>
+<p>代入原方程中：</p>
+<p>$$ \begin{equation} \begin{array}<br> xx = a_1 + (m_2 * t + k_1 ‘) * m_1 \\<br> a_1 + m_1 * m_2 *t + k_1 * m_1 \\<br> x_0 + m_1 * m_2 * t<br> \end{array} \end{equation} $$</p>
+<p>多项同余方程的话多次合并即可<br>得$x \equiv x_0(mod \quad m_1 * m_2 … * m_n)$</p>
+<p>但当模数并非两两互质的时候呢？</p>
+<p>##拓展中国剩余定理</p>
+<p>首先，我们再使用ex_gcd时就要考虑能不能得到正整数解了；<br>当能得到正整数解时，如何得到所有正整数解呢？</p>
+<p>已知$a_1 | m_1 \qquad a_2 | m_2$, 我们取g = gcd(m_1, m_2);</p>
+<p>$$ k_1 * (m_1 / g) - k_2 * (m_2 / g) = x = (a_2 - a_2) / g$$</p>
+<p>此时$k_1, k_2$的系数又互质了</p>
+<p>此时所有正整数解为：<br>$$ \begin{equation} \left \lbrace \begin{array}<br> k_1 = (m_2 / g) * t + k_1’<br>&amp; \ k_2 = (m_1 / g) * t + k_2’<br> &amp;<br>\end{array} \right . \end{equation} $$</p>
+<p>代入解得<br>$x = x_0 + (m_1 * m_2 / g) * t$</p>
+<p>也就是$x = x_0 + lcm(m_1, m_2) * t$</p>
+<p>多项和也就为$x \equiv x_0(mod \quad lcm(m_1 , m_2 … , m_n))$</p>
+<p>代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">ex_crt</span><span class="params">(<span class="keyword">int</span> m[], <span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> k, y;</span><br><span class="line">        <span class="keyword">int</span> p = ex_gcd(m[<span class="number">0</span>], -m[i], a[i] - a[<span class="number">0</span>], k, y);</span><br><span class="line">        <span class="keyword">if</span>(p &lt; <span class="number">0</span>)p *= <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span>((a[<span class="number">0</span>] - a[i]) % p)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        m[i] /= p;</span><br><span class="line">        k = ((a[<span class="number">0</span>] - a[i]) / p * x % m[i] + m[i]) % m[i];</span><br><span class="line">        a[<span class="number">0</span>] = a[<span class="number">0</span>] + k * m[<span class="number">0</span>];</span><br><span class="line">        m[<span class="number">0</span>] = m[<span class="number">0</span>] * m[i];</span><br><span class="line">    &#125;</span><br><span class="line">    a[<span class="number">0</span>] = (a[<span class="number">0</span>] % m[<span class="number">0</span>] + m[<span class="number">0</span>]) % m[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">return</span> a[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实践一波 <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1573" target="_blank" rel="noopener">HDU - 1573</a><br>还有<a href="http://poj.org/problem?id=1006" target="_blank" rel="noopener">poj - 1006</a><br>几乎裸题，看完上面就能做，就不附题解了；</p>
+<h2 id="附记"><a href="#附记" class="headerlink" title="附记"></a>附记</h2><p>通解写完了，但孙子定理却不是这样做的；<br>孙子定理是在模数互质的情况下，<br>$$ \begin{equation} \left \lbrace \begin{array}<br> xx \equiv a_1 (mod \quad m_1)<br>&amp; \\ x \equiv a_2 (mod \quad m_2)<br> &amp; \\ …<br> &amp; \\ x \equiv a_n (mod \quad m_n)<br> &amp;<br>\end{array} \right . \end{equation} $$</p>
+<p>让每一个式子的解都能被其他式子的模整除，同时模自己的m[i]还要等于a[i]</p>
+<p>我们设$M = m_1 * m_2 * m_3 … * m_n$;<br>为了让x模$m_n$能够得到$a_i$， 那么必然要让x与$a_i$相关联。<br>首先我们知道$a_i \equiv a_i (mod \quad m_i)$, 设Mi = M / mi, 构造Mi%mi的逆元t，得到$Mi*t \equiv 1 (mod \quad m_i)$, 根据模运算的可乘性，得到$Mi * t * a_i \equiv a_i (mod \quad m_i)$, 再将所有解相加，即可得最终解；</p>
+<p>代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">crt</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line"> ll ans = <span class="number">0</span>, M = <span class="number">1</span>;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line"> M *= m[i];</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line"> ll tmp = M / m[i];</span><br><span class="line"> ll x, y;</span><br><span class="line"> ex_gcd(tmp, mr[i], x, y);</span><br><span class="line"> ans = (ans + tmp * x * a[i]) % M;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> (ans % M + M) % M;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参考文章：<a href="http://blog.miskcoo.com/2014/09/chinese-remainder-theorem" target="_blank" rel="noopener">http://blog.miskcoo.com/2014/09/chinese-remainder-theorem</a><br>        <a href="https://blog.csdn.net/dafang_xu/article/details/50818919" target="_blank" rel="noopener">https://blog.csdn.net/dafang_xu/article/details/50818919</a></p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2019/03/21/算法竞赛入门经典第四章例题-6-6/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/03/09/从零到花式求解逆元/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-03-09 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/algorithm/">algorithm<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/algorithm/">算法<span>2</span></a></li> <li><a href="/tags/数论/">数论<span>2</span></a></li> <li><a href="/tags/for-zero/">从零开始系列<span>3</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#欧几里得算法"><span class="toc-article-text">欧几里得算法</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#用gcd求最小公倍数"><span class="toc-article-text">用gcd求最小公倍数</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#裴蜀定理"><span class="toc-article-text">裴蜀定理</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#拓展欧几里得算法"><span class="toc-article-text">拓展欧几里得算法</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#中国剩余定理（孙子定理）"><span class="toc-article-text">中国剩余定理（孙子定理）</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#附记"><span class="toc-article-text">附记</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+
+	<div id="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#comment' ,
+        notify:true, 
+        verify:true, 
+        appId: 'mpYG5gk3zUSGLHSmW2YgT3oA-gzGzoHsz',
+        appKey: 'vV040gPRCKgVKVH5niloUksW',
+        placeholder: '评论一下再走嘛o(*￣▽￣*)ブ',
+        path:window.location.pathname, 
+        avatar:'mm',
+        visitor:true
+    });
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            if (!email.value || !nick.value) {
+                const str = `<div class="valert txt-center"><div class="vtext">请填写昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+        });
+    </script>
+	
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2020 Ghost_LZW
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'BDeNfFwDjzz41GphGyrf','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+
+	<script>
+		function caculate(){
+			var totExp = 0;
+			for(var i = document.getElementById("lelnow").value; i <= document.getElementById("lelto").value; i++){
+				totExp += parseInt((Math.pow(i, 2.5) - 4000) / 100) * 1000;
+			}
+			totExp -= parseInt(document.getElementById("expnow").value);
+			var preExp = 0.0;
+			preExp += parseFloat(document.getElementById("dfexp").value);
+			preExp *= (parseFloat(document.getElementById("dfplus").value) / 100.0 + 1.0);
+			preExp += parseInt(document.getElementById("travelexp").value);
+			preExp += parseInt(document.getElementById("didi").value);
+			var time = totExp / preExp;
+			var date = new Date(new Date().getTime() + time * 60 * 1000);
+			var result = '你大概会在'+ date.getFullYear()+'年 '
+						+(date.getMonth()+1)+'月 '
+						+date.getDate()+ '日 ' + date.getHours()+'时'+date.getMinutes()+'分达到目标等级，请注意及时闭关';
+			alert(result);
+			x = document.getElementById("ans");
+			x.innerHTML=result;
+			return false;
+		}
+	</script>
+
+<title>掌上修仙经验计算器</title>
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+<form id="frm" onsubmit="caculate(); return false;" target="rfFrame">
+	<h1>掌上修仙经验计算器（仅限于天仙之下</h1>
+	当前等级:<br />
+	<input type="number" id="lelnow" value="0"><br />
+	目标等级(默认为等级满级状态，如输入230便是到达230级时间，即闭关时间):<br />
+	<input type="number" id="lelto" value="0"><br />
+	当前经验:<br />
+	<input type="number" id="expnow" value="0"><br />
+	洞府经验:<br />
+	<input type="number" id="dfexp" value="0"><br />
+	洞府加成:<br />
+	<input type="number" id="dfplus" value="0" step="0.01">%<br />
+	游历经验:<br />
+	<input type="number" id="travelexp" value="0"><br />
+	盟友探险:<br />
+	<input type="number" id="didi" value="0"><br /><br />
+	<hr />
+	<input type="submit" value="计算">
+	<br />
+</form>
+<iframe id="rfFrame" name="rfFrame" src="about:blank" style="display:none;"></iframe> 
+<br />
+<hr />
+<p id="ans"></p>
+</body>
+</html>

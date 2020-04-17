@@ -1,0 +1,384 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>从零到花式求解逆元 | 蓝灵博客</title>
+  <meta name="author" content="Ghost_LZW">
+  
+  <meta name="description" content="数论逆元知识总结.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="从零到花式求解逆元"/>
+  <meta property="og:site_name" content="蓝灵博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="蓝灵博客" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-134518650-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f5b3b5dfc13e08e896e4bd5b5f03ab28";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">蓝灵博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 从零到花式求解逆元</h1>
+		</div>
+	
+
+
+
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+			tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+			TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+			messageStyle: "none"
+	}); 
+</script>
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Queue(function() {
+			var all = MathJax.Hub.getAllJax(), i;
+			for(i=0; i < all.length; i += 1) {
+					all[i].SourceElement().parentNode.className += ' has-jax';
+			}
+	});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async>
+</script>
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> 数论逆元知识总结.
+		 </div> <!-- alert -->
+	  		
+
+	  <p>逆元是求解 $a / b \quad mod \quad c$问题的知识，为什么会存在这个以及如何求解逆元呢？今天，本文将带着读者走进逆元；</p>
+<a id="more"></a>
+<p><s>上篇中国剩余写了好久，这篇就简略点，，一些证明就不写了，，</s><br>首先让我们加入带余除法的概念；</p>
+<h2 id="带余除法"><a href="#带余除法" class="headerlink" title="带余除法"></a>带余除法</h2><p>a / b == c···d；<br>a/b取整 [a / b] == c;<br>a % b == d;</p>
+<p>相关性质：<br>(a + b) % c == (a % c + b % c) % c;<br>(a - b) % c == (a % c - b % c) % c;<br>(a * b) % c == (a % c * b % c) % c;</p>
+<p>相关证明:<br>a = dc + e, b = fc + g;</p>
+<p>(a + b) % c == [(d + f)c + e + f] % c == (e + f) % c == (a % c + b % c) % c；</p>
+<p>同理， 读者可自行证明其他定理；</p>
+<p>那么问题来了，能不能除呢？？</p>
+<p>通过举个例子我们便能知道会出现错误；</p>
+<p>既然能加减，能乘，怎么能不能除？？</p>
+<h2 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h2><p>(a / b) % m不能展开，那么我们找到$b ^ {-1} $, 通过能乘的性质，就能得到(a % m * b ^{-1} % m) % m了，这个b^-1就是我们所求的逆元了，他要满足 $b * b ^ {-1} \equiv 1 (mod m)$;</p>
+<h2 id="费马小定理求乘法逆元"><a href="#费马小定理求乘法逆元" class="headerlink" title="费马小定理求乘法逆元"></a>费马小定理求乘法逆元</h2><p>当p为素数， $p ^ {m - 1} \equiv 1 (mod \quad m)$;</p>
+<p>代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">solve</span> <span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="built_in">pow</span>(a, p<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可用快速幂求解；<br>代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">solve</span><span class="params">(ll a, ll p)</span> </span>&#123;</span><br><span class="line">    ll t = p - <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (a %= p; t; a = a * a % p, t &gt;&gt;= <span class="number">1</span>) <span class="keyword">if</span> (t &amp; <span class="number">1</span>) ans = ans * a % p;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="欧拉定理求乘法逆元"><a href="#欧拉定理求乘法逆元" class="headerlink" title="欧拉定理求乘法逆元"></a>欧拉定理求乘法逆元</h2><p>欧拉函数φ(n)的值为小于等于n中与n构成互质关系的数的数量</p>
+<p>欧拉定理即为$a ^ { φ(n) } \equiv 1 (mod \quad m)$</p>
+<h2 id="积性函数"><a href="#积性函数" class="headerlink" title="积性函数"></a>积性函数</h2><p>为了求欧拉函数，我们先要了解一下积性函数，因为欧拉函数就是一个积性函数</p>
+<p>积性函数的定义为当f(n)不恒为0时， (m, n) == 1时， f(nm) == f(m) * f(n);<br>若没有(m, n) == 1也满足，则为完全积性函数；</p>
+<p>##求解欧拉函数</p>
+<p>当p为素数， φ(p) = p - 1；</p>
+<p>很好理解这一点，只有1不和素数互质；<br>但当n不为素数的时候呢？</p>
+<p>当n为p ^ k时，只有p的倍数不与n构成互质， 也就是有p ^ k / p个数与n不构成互质， 那么$φ(n) = p ^ k - p ^ {k - 1}$;</p>
+<p>我们把n转化为$ n = p_1^{k_1} * p_2 ^ {k_2} * … * p_m ^ {k_m} $<br>根据积性函数的性质<br>得到$φ(n) = (p_1 ^ {k_1} - p_1 ^ {k_1 - 1}) * … *(p_m ^ {k_m} - p_m ^ {k_m - 1}) $</p>
+<p>再提取下公因数，得到$φ(n) = n * (1 - p_1 ^ {- 1} ) * (1 - p_2 ^ {- 1} ) * … * (1 - p_m ^ {- 1} ) $</p>
+<p>代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">eurle</span><span class="params">()</span></span>&#123;</span><br><span class="line">    p[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; Ma; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(p[i])<span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt; Ma; j += i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!p[i])p[i] = j;</span><br><span class="line">            p[i] = p[i] / i * (i - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着用欧拉定理求逆元；</p>
+<p>代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span> <span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="built_in">pow</span>(a, phi(m)<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可用快速幂求解，参考费马小定理；<br>我们回去看费马小定理的时候，就发现这不就是欧拉定理的数为素数的时候吗？？查阅资料后，发现果然是欧拉证明的费马小定理；</p>
+<h2 id="扩展欧几里得求逆元"><a href="#扩展欧几里得求逆元" class="headerlink" title="扩展欧几里得求逆元"></a>扩展欧几里得求逆元</h2><p>将$b * b ^ {-1} \equiv 1 (mod m)$转化为b * b^-1 + mk = 1;<br>便可用<a href="../从零到中国剩余定理">扩展欧几里得求解</a>；</p>
+<h2 id="递推法求解逆元"><a href="#递推法求解逆元" class="headerlink" title="递推法求解逆元"></a>递推法求解逆元</h2><p>其实也能通过递推打表解决；</p>
+<p>设p = k * i + r;</p>
+<p>k * i + r = 0 (mod p);</p>
+<p>同时乘$i^{-1} * r ^ {-1}$;</p>
+<p>$k * r^{-1} + i^{-1} ≡ 0 (mod p)$</p>
+<p>$i ^ -1 ≡ -k * r ^ {-1} (mod p)$</p>
+<p>$i ^ -1 ≡ -⌊p / i⌋ * (p mod i)^{-1} (mod p)$;</p>
+<p>代码实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ny[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; Ma; i++)</span><br><span class="line">    ny[i] = ((-(p / i) * ny[m % i]) % m + m) % m;</span><br></pre></td></tr></table></figure>	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2019/03/09/从零到中国剩余定理/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/02/28/Floating-Point-Numbers题解/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-03-09 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/algorithm/">algorithm<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/algorithm/">算法<span>2</span></a></li> <li><a href="/tags/数论/">数论<span>2</span></a></li> <li><a href="/tags/for-zero/">从零开始系列<span>3</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#带余除法"><span class="toc-article-text">带余除法</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#逆元"><span class="toc-article-text">逆元</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#费马小定理求乘法逆元"><span class="toc-article-text">费马小定理求乘法逆元</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#欧拉定理求乘法逆元"><span class="toc-article-text">欧拉定理求乘法逆元</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#积性函数"><span class="toc-article-text">积性函数</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#扩展欧几里得求逆元"><span class="toc-article-text">扩展欧几里得求逆元</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#递推法求解逆元"><span class="toc-article-text">递推法求解逆元</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+
+	<div id="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#comment' ,
+        notify:true, 
+        verify:true, 
+        appId: 'mpYG5gk3zUSGLHSmW2YgT3oA-gzGzoHsz',
+        appKey: 'vV040gPRCKgVKVH5niloUksW',
+        placeholder: '评论一下再走嘛o(*￣▽￣*)ブ',
+        path:window.location.pathname, 
+        avatar:'mm',
+        visitor:true
+    });
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            if (!email.value || !nick.value) {
+                const str = `<div class="valert txt-center"><div class="vtext">请填写昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+        });
+    </script>
+	
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2020 Ghost_LZW
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'BDeNfFwDjzz41GphGyrf','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

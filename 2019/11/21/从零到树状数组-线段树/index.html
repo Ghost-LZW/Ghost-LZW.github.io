@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>从零到树状数组&amp;线段树 | 蓝灵博客</title>
+  <meta name="author" content="Ghost_LZW">
+  
+  <meta name="description" content="树状数组和线段树小结.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="从零到树状数组&amp;线段树"/>
+  <meta property="og:site_name" content="蓝灵博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="蓝灵博客" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-134518650-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f5b3b5dfc13e08e896e4bd5b5f03ab28";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">蓝灵博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 从零到树状数组&amp;线段树</h1>
+		</div>
+	
+
+
+
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+			tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+			TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+			messageStyle: "none"
+	}); 
+</script>
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Queue(function() {
+			var all = MathJax.Hub.getAllJax(), i;
+			for(i=0; i < all.length; i += 1) {
+					all[i].SourceElement().parentNode.className += ' has-jax';
+			}
+	});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async>
+</script>
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> 树状数组和线段树小结.
+		 </div> <!-- alert -->
+	  		
+
+	  <p>总想着总结下总咕咕了，</p>
+<p>今天来填坑了，  总结下树状数组和线段树，</p>
+<p>此文顺便全方面对比树状数组与线段树， 并加以题目验证</p>
+<p>客观对比树状数组， 线段树 <del>( 再次体验树状数组的优雅</del></p>
+<p>由于各种原因(懒)， 这里的从零开始指的是理解线段树和树状数组基础</p>
+<a id="more"></a>
+
+<p>持续跟新中…</p>
+<h2 id="单点修改，-区间求和"><a href="#单点修改，-区间求和" class="headerlink" title="单点修改， 区间求和"></a>单点修改， 区间求和</h2><p>基础操作， 直接上例题吧</p>
+<p><a href="https://vjudge.net/problem/HDU-1166" target="_blank" rel="noopener">HDU - 1166</a></p>
+<p>题意： 单点修改，区间求和</p>
+<p>题解：树状数组优势项目， 主要代码就四五行， </p>
+<p>树状数组就用lowbit进行区间跳跃， 进行修改和求和</p>
+<p>这里用时间戳做了个小优化，达成清空数组的效果</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BitTree</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> ans[Ma], b[Ma];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(; pos &lt; Ma; pos += lowbit(pos))</span><br><span class="line">			ans[pos] = b[pos] &lt; T ? val : ans[pos] + val, b[pos] = T;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> pos)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> s = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(; pos; pos -= lowbit(pos))</span><br><span class="line">			s += b[pos] &lt; T ? <span class="number">0</span> : ans[pos];</span><br><span class="line">		<span class="keyword">return</span> s;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">range</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> sum(r) - sum(l - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>线段树就用建树之后正常修改和查询即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SegTree</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> sum[Ma &lt;&lt; <span class="number">2</span>];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l == r)&#123;sum[o] = val[l];<span class="keyword">return</span> ;&#125;</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		build(o &lt;&lt; <span class="number">1</span>, l, mid);</span><br><span class="line">		build(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">		sum[o] = sum[o &lt;&lt; <span class="number">1</span>] + sum[o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> pos, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l == r)&#123;sum[o] += val;<span class="keyword">return</span> ;&#125;</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(pos &lt;= mid)update(o &lt;&lt; <span class="number">1</span>, l, mid, pos, val);</span><br><span class="line">		<span class="keyword">else</span> update(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r, pos, val);</span><br><span class="line">		sum[o] = sum[o &lt;&lt; <span class="number">1</span>] + sum[o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">qSum</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l &gt; R || r &lt; L)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(l &gt;= L &amp;&amp; r &lt;= R)<span class="keyword">return</span> sum[o];</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> qSum(o &lt;&lt; <span class="number">1</span>, l, mid, L, R) + qSum(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r, L, R);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>solution1:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*********************************************************</span></span><br><span class="line"><span class="comment">Flie Name: hud1166.cpp</span></span><br><span class="line"><span class="comment">Author: Liupo</span></span><br><span class="line"><span class="comment">Email: lanzongwei541@gmail.com</span></span><br><span class="line"><span class="comment">Creat time: 2019年11月21日 星期四 15时40分28秒</span></span><br><span class="line"><span class="comment">*********************************************************/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i, n) for(int i = 0; i &lt; n; i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> seg(i) i.begin(), i.end()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Mem(i) memset(i, 0, sizeof(i))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) ((-x)&amp;x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Clear (++T)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> Ma = <span class="number">5e4</span> + <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BitTree</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> ans[Ma], b[Ma];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(; pos &lt; Ma; pos += lowbit(pos))</span><br><span class="line">			ans[pos] = b[pos] &lt; T ? val : ans[pos] + val, b[pos] = T;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> pos)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> s = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(; pos; pos -= lowbit(pos))</span><br><span class="line">			s += b[pos] &lt; T ? <span class="number">0</span> : ans[pos];</span><br><span class="line">		<span class="keyword">return</span> s;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">range</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> sum(r) - sum(l - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;bt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="literal">nullptr</span>);</span><br><span class="line">	<span class="keyword">int</span> To;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; To;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= To; k++)&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; k &lt;&lt; <span class="string">":\n"</span>;</span><br><span class="line">		<span class="keyword">int</span> n;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> t, i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; t, bt.add(i, t);</span><br><span class="line">		<span class="built_in">string</span> com;</span><br><span class="line">		<span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; com &amp;&amp; com[<span class="number">0</span>] != <span class="string">'E'</span>)&#123;</span><br><span class="line">			<span class="keyword">int</span> a, b;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">			<span class="keyword">if</span>(com[<span class="number">0</span>] == <span class="string">'A'</span>)bt.add(a, b);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(com[<span class="number">0</span>] == <span class="string">'S'</span>)bt.add(a, -b);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(com[<span class="number">0</span>] == <span class="string">'Q'</span>)<span class="built_in">cout</span> &lt;&lt; bt.range(a, b) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">			<span class="keyword">else</span> assert(<span class="literal">false</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		Clear;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>solution2:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*********************************************************</span></span><br><span class="line"><span class="comment">Flie Name: hud1166.cpp</span></span><br><span class="line"><span class="comment">Author: Liupo</span></span><br><span class="line"><span class="comment">Email: lanzongwei541@gmail.com</span></span><br><span class="line"><span class="comment">Creat time: 2019年11月21日 星期四 15时40分28秒</span></span><br><span class="line"><span class="comment">*********************************************************/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i, n) for(int i = 0; i &lt; n; i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> seg(i) i.begin(), i.end()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Mem(i) memset(i, 0, sizeof(i))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) ((-x)&amp;x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Clear (++T)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> Ma = <span class="number">5e4</span> + <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> val[Ma];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SegTree</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> sum[Ma &lt;&lt; <span class="number">2</span>];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l == r)&#123;sum[o] = val[l];<span class="keyword">return</span> ;&#125;</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		build(o &lt;&lt; <span class="number">1</span>, l, mid);</span><br><span class="line">		build(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">		sum[o] = sum[o &lt;&lt; <span class="number">1</span>] + sum[o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> pos, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l == r)&#123;sum[o] += val;<span class="keyword">return</span> ;&#125;</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(pos &lt;= mid)update(o &lt;&lt; <span class="number">1</span>, l, mid, pos, val);</span><br><span class="line">		<span class="keyword">else</span> update(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r, pos, val);</span><br><span class="line">		sum[o] = sum[o &lt;&lt; <span class="number">1</span>] + sum[o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">qSum</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l &gt; R || r &lt; L)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(l &gt;= L &amp;&amp; r &lt;= R)<span class="keyword">return</span> sum[o];</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> qSum(o &lt;&lt; <span class="number">1</span>, l, mid, L, R) + qSum(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r, L, R);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;st;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="literal">nullptr</span>);</span><br><span class="line">	<span class="keyword">int</span> To;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; To;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= To; k++)&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; k &lt;&lt; <span class="string">":\n"</span>;</span><br><span class="line">		<span class="keyword">int</span> n;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; val[i];</span><br><span class="line">		st.build(<span class="number">1</span>, <span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">		<span class="built_in">string</span> com;</span><br><span class="line">		<span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; com &amp;&amp; com[<span class="number">0</span>] != <span class="string">'E'</span>)&#123;</span><br><span class="line">			<span class="keyword">int</span> a, b;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">			<span class="keyword">if</span>(com[<span class="number">0</span>] == <span class="string">'A'</span>)st.update(<span class="number">1</span>, <span class="number">0</span>, n - <span class="number">1</span>, a - <span class="number">1</span>, b);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(com[<span class="number">0</span>] == <span class="string">'S'</span>)st.update(<span class="number">1</span>, <span class="number">0</span>, n - <span class="number">1</span>, a - <span class="number">1</span>, -b);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(com[<span class="number">0</span>] == <span class="string">'Q'</span>)<span class="built_in">cout</span> &lt;&lt; st.qSum(<span class="number">1</span>, <span class="number">0</span>, n - <span class="number">1</span>, a - <span class="number">1</span>, b - <span class="number">1</span>) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">			<span class="keyword">else</span> assert(<span class="literal">false</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="单点修改，-RMQ"><a href="#单点修改，-RMQ" class="headerlink" title="单点修改， RMQ"></a>单点修改， RMQ</h2><p>线段树无脑项目，改改查询就行</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SegTree</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> Max[Ma &lt;&lt; <span class="number">2</span>];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l == r)&#123;Max[o] = val[l];<span class="keyword">return</span> ;&#125;</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		build(o &lt;&lt; <span class="number">1</span>, l, mid);</span><br><span class="line">		build(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">		Max[o] = max(Max[o &lt;&lt; <span class="number">1</span>], Max[o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> pos, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l == r)&#123;Max[o] = val;<span class="keyword">return</span> ;&#125;</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(pos &lt;= mid)update(o &lt;&lt; <span class="number">1</span>, l, mid, pos, val);</span><br><span class="line">		<span class="keyword">else</span> update(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r, pos, val);</span><br><span class="line">		Max[o] = max(Max[o &lt;&lt; <span class="number">1</span>], Max[o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">qMax</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l &gt; R || r &lt; L)<span class="keyword">return</span> -inf;</span><br><span class="line">		<span class="keyword">if</span>(l &gt;= L &amp;&amp; r &lt;= R)<span class="keyword">return</span> Max[o];</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> max(qMax(o &lt;&lt; <span class="number">1</span>, l, mid, L, R), qMax(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r, L, R));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;st;</span><br></pre></td></tr></table></figure>
+
+<p>树状数组得来些优雅操作</p>
+<p>直接搞？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(; pos &lt; Ma; pos += lowbit(pos))</span><br><span class="line">		ans[pos] += val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>明显，初始构建时是可行的，但遇到后续修改的时候就出现问题了，每次都清空构建O(n * m * log(n))不现实</p>
+<p>众所周知，lowbit保留了二进制下的最后一个一， 那么所能对当前数造成影响的所有数的下标是能通过加上那个一得到当前数下标的那些</p>
+<p>也就是说 1001000, 能对他造成影响的只有</p>
+<p>1000100 + lowbit(1000100) = 1000100 + <mark>100</mark> = 1001000</p>
+<p>1000110 + lowbit(1000110) = 1000110 + <mark>10</mark> = 1001000</p>
+<p>1000111 + lowbit(1000111) = 1000111 + <mark>1</mark> = 1001000</p>
+<p>看到这儿， 你琢磨了一会， 发现， 不就是这样吗！</p>
+<p>能影响当前数的不就是 $x - 2^0, x - 2^1 … x - 2^n$ ($2^n &lt; lowbit(x)$) 吗？</p>
+<p>于是一个O(log^2 n)的更新就诞生了</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(; pos &lt; Max; pos += lowbit(pos))&#123;</span><br><span class="line">		ans[pos] = val;</span><br><span class="line">		<span class="keyword">int</span> t = lowbit(pos);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; t; i &lt;&lt;= <span class="number">1</span>)</span><br><span class="line">			ans[pos] = max(ans[pos], ans[pos - i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面进行查询， 寻常树状数组的查询的东西都是带有可减性的，在这儿的最值可没有，</p>
+<p>那么就从右边往坐跳， 如果跳了会出去，那么我就一个个看</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qMax</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> qm = -inf;</span><br><span class="line">	<span class="keyword">while</span>(l &lt;= r;)&#123;</span><br><span class="line">		qm = max(qm, a[r]);</span><br><span class="line">		r--;</span><br><span class="line">		<span class="keyword">for</span>(; r - lowbit(r) &gt;= l; r -= lowbit(r))</span><br><span class="line">			qm = max(qm, ans[r]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样， 你就得到了一个O(log^2 n)的查询</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BitTree</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> ans[Ma];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> va)</span></span>&#123;</span><br><span class="line">		val[pos] = va;</span><br><span class="line">		<span class="keyword">for</span>(; pos &lt; Ma; pos += lowbit(pos))&#123;</span><br><span class="line">			ans[pos] = val[pos];</span><br><span class="line">			<span class="keyword">int</span> t = lowbit(pos);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; t; i &lt;&lt;= <span class="number">1</span>)</span><br><span class="line">				ans[pos] = max(ans[pos], ans[pos - i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Max</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> s = -inf;</span><br><span class="line">		<span class="keyword">while</span>(l &lt;= r)&#123;</span><br><span class="line">			s = max(s, val[r]);</span><br><span class="line">			r--;</span><br><span class="line">			<span class="keyword">for</span>(; r - lowbit(r) &gt;= l; r -= lowbit(r))</span><br><span class="line">				s = max(s, ans[r]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> s;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;bt;</span><br></pre></td></tr></table></figure>
+
+<p>接下来上题吧</p>
+<p><a href="https://vjudge.net/problem/HDU-1754" target="_blank" rel="noopener">HDU-1754</a></p>
+<p>solution1:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*********************************************************</span></span><br><span class="line"><span class="comment">Flie Name: hdu1754.cpp</span></span><br><span class="line"><span class="comment">Author: Liupo</span></span><br><span class="line"><span class="comment">Email: lanzongwei541@gmail.com</span></span><br><span class="line"><span class="comment">Creat time: 2019年11月21日 星期四 21时08分37秒</span></span><br><span class="line"><span class="comment">*********************************************************/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i, n) for(int i = 0; i &lt; n; i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> seg(i) i.begin(), i.end()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Mem(i) memset(i, 0, sizeof(i))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) ((-x)&amp;x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Clear (++Ti)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>, Ma = <span class="number">2e5</span> + <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> val[Ma];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SegTree</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> Max[Ma &lt;&lt; <span class="number">2</span>];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l == r)&#123;Max[o] = val[l];<span class="keyword">return</span> ;&#125;</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		build(o &lt;&lt; <span class="number">1</span>, l, mid);</span><br><span class="line">		build(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">		Max[o] = max(Max[o &lt;&lt; <span class="number">1</span>], Max[o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> pos, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l == r)&#123;Max[o] = val;<span class="keyword">return</span> ;&#125;</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(pos &lt;= mid)update(o &lt;&lt; <span class="number">1</span>, l, mid, pos, val);</span><br><span class="line">		<span class="keyword">else</span> update(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r, pos, val);</span><br><span class="line">		Max[o] = max(Max[o &lt;&lt; <span class="number">1</span>], Max[o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">qMax</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l &gt; R || r &lt; L)<span class="keyword">return</span> -inf;</span><br><span class="line">		<span class="keyword">if</span>(l &gt;= L &amp;&amp; r &lt;= R)<span class="keyword">return</span> Max[o];</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> max(qMax(o &lt;&lt; <span class="number">1</span>, l, mid, L, R), qMax(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r, L, R));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;st;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="literal">nullptr</span>);</span><br><span class="line">	<span class="keyword">int</span> n, m;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; val[i];</span><br><span class="line">		st.build(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">		<span class="keyword">while</span>(m--)&#123;</span><br><span class="line">			<span class="keyword">int</span> l, r;</span><br><span class="line">			<span class="keyword">char</span> com;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; com &gt;&gt; l &gt;&gt; r;</span><br><span class="line">			<span class="keyword">if</span>(com == <span class="string">'U'</span>)st.update(<span class="number">1</span>, <span class="number">1</span>, n, l, r);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(com == <span class="string">'Q'</span>)<span class="built_in">cout</span> &lt;&lt; st.qMax(<span class="number">1</span>, <span class="number">1</span>, n, l, r) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">			<span class="keyword">else</span> assert(<span class="literal">false</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>solution2:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*********************************************************</span></span><br><span class="line"><span class="comment">Flie Name: hdu1754.cpp</span></span><br><span class="line"><span class="comment">Author: Liupo</span></span><br><span class="line"><span class="comment">Email: lanzongwei541@gmail.com</span></span><br><span class="line"><span class="comment">Creat time: 2019年11月21日 星期四 21时08分37秒</span></span><br><span class="line"><span class="comment">*********************************************************/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i, n) for(int i = 0; i &lt; n; i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> seg(i) i.begin(), i.end()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Mem(i) memset(i, 0, sizeof(i))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) ((-x)&amp;x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Clear (++Ti)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>, Ma = <span class="number">2e5</span> + <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> val[Ma];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BitTree</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> ans[Ma];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="built_in">memset</span>(ans, <span class="number">0</span>, <span class="keyword">sizeof</span>(ans));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> va)</span></span>&#123;</span><br><span class="line">		val[pos] = va;</span><br><span class="line">		<span class="keyword">for</span>(; pos &lt; Ma; pos += lowbit(pos))&#123;</span><br><span class="line">			ans[pos] = val[pos];</span><br><span class="line">			<span class="keyword">int</span> t = lowbit(pos);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; t; i &lt;&lt;= <span class="number">1</span>)</span><br><span class="line">				ans[pos] = max(ans[pos], ans[pos - i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Max</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> s = -inf;</span><br><span class="line">		<span class="keyword">while</span>(l &lt;= r)&#123;</span><br><span class="line">			s = max(s, val[r]);</span><br><span class="line">			r--;</span><br><span class="line">			<span class="keyword">for</span>(; r - lowbit(r) &gt;= l; r -= lowbit(r))</span><br><span class="line">				s = max(s, ans[r]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> s;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;bt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="literal">nullptr</span>);</span><br><span class="line">	<span class="keyword">int</span> n, m;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m)&#123;</span><br><span class="line">		bt.init();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> t, i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; t, bt.change(i, t);</span><br><span class="line">		<span class="keyword">while</span>(m--)&#123;</span><br><span class="line">			<span class="keyword">int</span> l, r;</span><br><span class="line">			<span class="keyword">char</span> com;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; com &gt;&gt; l &gt;&gt; r;</span><br><span class="line">			<span class="keyword">if</span>(com == <span class="string">'U'</span>)bt.change(l, r);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(com == <span class="string">'Q'</span>)<span class="built_in">cout</span> &lt;&lt; bt.Max(l, r) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">			<span class="keyword">else</span> assert(<span class="literal">false</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="区间修改-区间查询"><a href="#区间修改-区间查询" class="headerlink" title="区间修改 区间查询"></a>区间修改 区间查询</h2>	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2020/01/30/sdnu2020WinterContest3rd题解报告/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/11/12/算法竞赛入门经典第六章习题-14-14/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-11-21 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/datastructure/">dataStructure<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/for-zero/">从零开始系列<span>3</span></a></li> <li><a href="/tags/dataManage/">数据结构<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#单点修改，-区间求和"><span class="toc-article-text">单点修改， 区间求和</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#单点修改，-RMQ"><span class="toc-article-text">单点修改， RMQ</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#区间修改-区间查询"><span class="toc-article-text">区间修改 区间查询</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+
+	<div id="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#comment' ,
+        notify:true, 
+        verify:true, 
+        appId: 'mpYG5gk3zUSGLHSmW2YgT3oA-gzGzoHsz',
+        appKey: 'vV040gPRCKgVKVH5niloUksW',
+        placeholder: '评论一下再走嘛o(*￣▽￣*)ブ',
+        path:window.location.pathname, 
+        avatar:'mm',
+        visitor:true
+    });
+    document.body.addEventListener('click', function(e) {
+        if (e.target.classList.contains('vsubmit')) {
+            const email = document.querySelector('input[type=email]');
+            const nick = document.querySelector('input[name=nick]');
+            if (!email.value || !nick.value) {
+                const str = `<div class="valert txt-center"><div class="vtext">请填写昵称和邮箱！</div></div>`;
+                const vmark = document.querySelector('.vmark');
+                vmark.innerHTML = str;
+                vmark.style.display = 'block';
+                setTimeout(function() {
+                    vmark.style.display = 'none';
+                    vmark.innerHTML = '';
+                }, 2500);
+            }
+        }
+        });
+    </script>
+	
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2020 Ghost_LZW
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/" target="_blank" rel="noopener">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'BDeNfFwDjzz41GphGyrf','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>
