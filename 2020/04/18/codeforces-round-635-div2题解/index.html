@@ -182,7 +182,7 @@ var _hmt = _hmt || [];
 <p>题解: 设dp[i][j] 为能满足t[i..j], 根据每次将si插入首或尾, 区间dp即可</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> Ma = <span class="number">3300</span>, inf = <span class="number">0x3f3f3f3f</span>, mod = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dp[Ma][Ma];</span><br><span class="line"><span class="keyword">char</span> s[Ma], t[Ma];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">if</span> SYNC==0</span></span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; s &gt;&gt; t; <span class="keyword">int</span> n = <span class="built_in">strlen</span>(s), m = <span class="built_in">strlen</span>(t);</span><br><span class="line">	fep (i, <span class="number">1</span>, n + <span class="number">2</span>) dp[i][i - <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">1</span>; l &lt; n - i + <span class="number">2</span>; ++l) &#123;</span><br><span class="line">			<span class="keyword">int</span> r = l + i - <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span> (s[i - <span class="number">1</span>] == t[l - <span class="number">1</span>] <span class="keyword">or</span> !t[l - <span class="number">1</span>])</span><br><span class="line">				(dp[l][r] += dp[l + <span class="number">1</span>][r]) %= mod;</span><br><span class="line">			<span class="keyword">if</span> (s[i - <span class="number">1</span>] == t[r - <span class="number">1</span>] <span class="keyword">or</span> !t[r - <span class="number">1</span>])</span><br><span class="line">				(dp[l][r] += dp[l][r - <span class="number">1</span>]) %= mod;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	ll ans = <span class="number">0</span>;</span><br><span class="line">	fep (i, m, n + <span class="number">1</span>) (ans += dp[<span class="number">1</span>][i]) %= mod;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="F-Yui-and-Mahjong-Set"><a href="#F-Yui-and-Mahjong-Set" class="headerlink" title="F - Yui and Mahjong Set"></a>F - Yui and Mahjong Set</h2>	  
+<h2 id="F-Yui-and-Mahjong-Set"><a href="#F-Yui-and-Mahjong-Set" class="headerlink" title="F - Yui and Mahjong Set"></a>F - Yui and Mahjong Set</h2><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
 	</div>
 
 	<div>
@@ -191,7 +191,8 @@ var _hmt = _hmt || [];
 
     
     
-    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    <a href="/2020/05/03/算法竞赛入门经典第七章例题-15-15/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
@@ -236,7 +237,7 @@ var _hmt = _hmt || [];
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/problem-solve/">题解<span>14</span></a></li>
+    <li><a href="/categories/problem-solve/">题解<span>15</span></a></li>
   </li>
 
     </ul>
@@ -249,7 +250,7 @@ var _hmt = _hmt || [];
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/code/">code<span>19</span></a></li>
+  <li><a href="/tags/code/">code<span>20</span></a></li>
     </ul>
 	</div>
 		
