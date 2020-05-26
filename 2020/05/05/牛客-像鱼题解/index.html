@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="pragma" content="no-cache">
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
@@ -62,10 +62,10 @@ var _hmt = _hmt || [];
 </script>
 
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
  <body>  
-  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 		<span class="sr-only">Toggle navigation</span>
@@ -160,10 +160,12 @@ var _hmt = _hmt || [];
 <a id="more"></a>
 <p>题解：本来像随便来偷一题玩玩，结果发现不会做😱，后来知道能oeis O(1)做🧐， 规律就是1, 1, 1, 2, 2, 2, 3, 3, 3</p>
 <p>除了oeis也能自己推，考虑保留某一行，那么倒三角能保留地点就是某一行之上的所有和某一行为基础尽量向下的三角形(梯形)</p>
-<p><img src="https://s1.ax1x.com/2020/05/05/YFBOMR.png" alt="YFBOMR.png"></p>
-<p>设最底行为0，设行数为x，每次能保留的硬币为y，易得到$y=2*(x+1)\frac{(n-x)+(n-x-x)}{2}-(n-x)$</p>
-<p>答案为$\frac{n*(n+1)}{2}-y$, 通项之后发现是二元一次方程，取最大值时$x=\frac{-b}{2a}$</p>
-<p>当x不为整数时$\lfloor x \rfloor , \lceil x \rceil$均有可能，取min即可</p>
+<figure>
+<img src="https://s1.ax1x.com/2020/05/05/YFBOMR.png" alt="" /><figcaption>YFBOMR.png</figcaption>
+</figure>
+<p>设最底行为0，设行数为x，每次能保留的硬币为y，易得到<span class="math inline">\(y=2*(x+1)\frac{(n-x)+(n-x-x)}{2}-(n-x)\)</span></p>
+<p>答案为<span class="math inline">\(\frac{n*(n+1)}{2}-y\)</span>, 通项之后发现是二元一次方程，取最大值时<span class="math inline">\(x=\frac{-b}{2a}\)</span></p>
+<p>当x不为整数时<span class="math inline">\(\lfloor x \rfloor , \lceil x \rceil\)</span>均有可能，取min即可</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mod = <span class="number">23333333333333333</span></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(int(input())) :</span><br><span class="line">    n = int(input())</span><br><span class="line">    x1 = (<span class="number">2</span> * n - <span class="number">2</span> + <span class="number">5</span>) // <span class="number">6</span></span><br><span class="line">    x2 = x1 - <span class="number">1</span></span><br><span class="line">    print((n * (n + <span class="number">1</span>) // <span class="number">2</span> - max((<span class="number">-3</span> * x1 * x1 + (<span class="number">2</span> * n - <span class="number">2</span>) * x1 + n), </span><br><span class="line">    (<span class="number">-3</span> * x2 * x2 + (<span class="number">2</span> * n - <span class="number">2</span>) * x2 + n))) % mod)</span><br></pre></td></tr></table></figure>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
 	</div>
@@ -330,7 +332,24 @@ var _hmt = _hmt || [];
 (function($){
   $('.fancybox').fancybox();
 })(jQuery);
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

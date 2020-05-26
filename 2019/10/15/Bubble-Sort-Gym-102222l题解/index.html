@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="pragma" content="no-cache">
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
@@ -62,10 +62,10 @@ var _hmt = _hmt || [];
 </script>
 
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
  <body>  
-  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 		<span class="sr-only">Toggle navigation</span>
@@ -155,23 +155,37 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h2 id="Bubble-Sort-2018银川网络赛"><a href="#Bubble-Sort-2018银川网络赛" class="headerlink" title="Bubble Sort 2018银川网络赛"></a><a href="https://vjudge.net/problem/Gym-102222I" target="_blank" rel="noopener">Bubble Sort</a> 2018银川网络赛</h2><p>题意： 给你一个1～n的序列，问你在k次冒泡后有多少排列能成为几乎排好序的序列。<br>几乎排好顺序的序列定义为 ： lcs  &gt;= n - 1;</p>
-<p>题解：<br>  此题是POJ3761的升级版本，也涉及到反序表的概念</p>
-  <a id="more"></a>
-<h3 id="反序表"><a href="#反序表" class="headerlink" title="反序表"></a>反序表</h3><p>反序表定义为： 令bi为位于i左边且大于i的元素的个数， 那么序列a1, a2, a3, a4…an 的反序表就为b1, b2, b3,b4…bn;</p>
-<p> 例如： 序列5 9 1 8 2 6 4 7 3<br>有反序表： 2 3 6 4 0 2 2 1 0</p>
-<p>易得一些结论：<br>        <ol>
-        <li>排列和反序表一一对应</li>
-        <li>bi的取值为[0, n - i ]</li>
-        <li>bi的取值与当前排列有关，和其他元素无关</li>
-        </ol></p>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>易证每次冒泡后，反序表中所有大于0的元素都至少会减一<br>        那么目标可转换为求当k次冒泡后反序表全为零和lcs为n - 1的情况;</p>
-<p>跑完k次冒泡后，后k个元素已经排好序，将他们各自的反序表可取值用加法原则相加，再用乘法原则，便能得到这k个元素能得到的序列数：<br>1 x 2 x 3 x 4 ,,,,, k, 也就是k!;</p>
-<p>接着看剩下的n - k个元素，当k次冒泡后序列变成了顺序队列时，此时bi应该为 bi &lt;= n - i + 1， 因为此时i &lt;= n - k,  所以 bi 取值范围可大于等于k;  而k次排序只能保证减少k，所以剩下n - k个元素取值范围为k + 1, 即(k + 1) ^ (n - k)就是这种情况下的序列数量</p>
-<p>下面讨论lcs为n - 1的情况， 我们先考虑当那个非lcs的数在序列最前面，那么后面n - k - 1个元素的可取值仍然为k + 1， 此时那个数，他的反序数只能比k  + 1多， 当那个数为1,他的可取范围就为[k + 1, n - 1]， 依次类推，一直到[k + 1, k, + 1]， 以加法原则相加后再用乘法原则</p>
-<script type="math/tex; mode=display">\sum_{i=1}^{n-k-1}{i}*(k+1)^{n-k-1}</script><p>当非lcs的数不在最前面，那么他肯定在中间<del>废话</del>,<br>在他前面的数就只能比他的反序数多，还只能一样，才能达成lcs， 那么取值范围就只能取最少的那个数。当取n - k - 1为非lcs数时n-k-1的反序数能取[0, k + 1]， 之前的数只能取k + 2, 以此类推，当这个数为1时会发现和之前考虑在最前面的重了，去掉即可</p>
-<script type="math/tex; mode=display">\sum_{i=1}^{n-k-2}{i*({k+1})^i}</script><p>注意当k大于n时，直接算全排好就行</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line">ll mod;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">fs</span><span class="params">(ll a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	ll ans = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(b &gt; <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b &amp; <span class="number">1</span>)ans = ans * a % mod;</span><br><span class="line">		a = a * a % mod;</span><br><span class="line">		b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T, q = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="keyword">int</span> n, k;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%lld"</span>, &amp;n, &amp;k, &amp;mod);</span><br><span class="line">		ll ans = fs(ll(k + <span class="number">1</span>), n - k);</span><br><span class="line">		<span class="keyword">if</span>(n &gt;= k + <span class="number">2</span>)ans = (ans +  fs(ll(k + <span class="number">1</span>), n - k - <span class="number">1</span>) * ((n - k) * (n - k - <span class="number">1</span>) / <span class="number">2</span>) % mod) % mod;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n - k - <span class="number">1</span>; i++)</span><br><span class="line">			ans = (ans + <span class="number">1l</span>l * i * fs(ll(k + <span class="number">1</span>), i) % mod) % mod;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="built_in">std</span>::min(k, n); i++)</span><br><span class="line">			ans = ans * i % mod;</span><br><span class="line">		assert(ans &gt;= <span class="number">0</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Case #%d: %I64d\n"</span>, ++q, ans);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
+	  <h2 id="bubble-sort-2018银川网络赛"><a href="https://vjudge.net/problem/Gym-102222I" target="_blank" rel="noopener">Bubble Sort</a> 2018银川网络赛</h2>
+<p>题意： 给你一个1～n的序列，问你在k次冒泡后有多少排列能成为几乎排好序的序列。 几乎排好顺序的序列定义为 ： lcs &gt;= n - 1;</p>
+<p>题解： 此题是POJ3761的升级版本，也涉及到反序表的概念</p>
+<p><a id="more"></a></p>
+<h3 id="反序表">反序表</h3>
+<p>反序表定义为： 令bi为位于i左边且大于i的元素的个数， 那么序列a1, a2, a3, a4...an 的反序表就为b1, b2, b3,b4...bn;</p>
+<p>例如： 序列5 9 1 8 2 6 4 7 3<br />
+有反序表： 2 3 6 4 0 2 2 1 0</p>
+易得一些结论：
+<ol>
+<li>
+排列和反序表一一对应
+</li>
+<li>
+bi的取值为[0, n - i ]
+</li>
+<li>
+bi的取值与当前排列有关，和其他元素无关
+</li>
+</ol>
+<h2 id="题解">题解</h2>
+<p>易证每次冒泡后，反序表中所有大于0的元素都至少会减一 那么目标可转换为求当k次冒泡后反序表全为零和lcs为n - 1的情况;</p>
+<p>跑完k次冒泡后，后k个元素已经排好序，将他们各自的反序表可取值用加法原则相加，再用乘法原则，便能得到这k个元素能得到的序列数： 1 x 2 x 3 x 4 ,,,,, k, 也就是k!;</p>
+<p>接着看剩下的n - k个元素，当k次冒泡后序列变成了顺序队列时，此时bi应该为 bi &lt;= n - i + 1， 因为此时i &lt;= n - k, 所以 bi 取值范围可大于等于k; 而k次排序只能保证减少k，所以剩下n - k个元素取值范围为k + 1, 即(k + 1) ^ (n - k)就是这种情况下的序列数量</p>
+<p>下面讨论lcs为n - 1的情况， 我们先考虑当那个非lcs的数在序列最前面，那么后面n - k - 1个元素的可取值仍然为k + 1， 此时那个数，他的反序数只能比k + 1多， 当那个数为1,他的可取范围就为[k + 1, n - 1]， 依次类推，一直到[k + 1, k, + 1]， 以加法原则相加后再用乘法原则</p>
+<p><span class="math display">\[ \sum_{i=1}^{n-k-1}{i}*(k+1)^{n-k-1} \]</span></p>
+<p>当非lcs的数不在最前面，那么他肯定在中间<del>废话</del>, 在他前面的数就只能比他的反序数多，还只能一样，才能达成lcs， 那么取值范围就只能取最少的那个数。当取n - k - 1为非lcs数时n-k-1的反序数能取[0, k + 1]， 之前的数只能取k + 2, 以此类推，当这个数为1时会发现和之前考虑在最前面的重了，去掉即可</p>
+<p><span class="math display">\[ \sum_{i=1}^{n-k-2}{i*({k+1})^i} \]</span></p>
+<p>注意当k大于n时，直接算全排好就行</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line">ll mod;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">fs</span><span class="params">(ll a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	ll ans = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(b &gt; <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b &amp; <span class="number">1</span>)ans = ans * a % mod;</span><br><span class="line">		a = a * a % mod;</span><br><span class="line">		b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T, q = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="keyword">int</span> n, k;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%lld"</span>, &amp;n, &amp;k, &amp;mod);</span><br><span class="line">		ll ans = fs(ll(k + <span class="number">1</span>), n - k);</span><br><span class="line">		<span class="keyword">if</span>(n &gt;= k + <span class="number">2</span>)ans = (ans +  fs(ll(k + <span class="number">1</span>), n - k - <span class="number">1</span>) * ((n - k) * (n - k - <span class="number">1</span>) / <span class="number">2</span>) % mod) % mod;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n - k - <span class="number">1</span>; i++)</span><br><span class="line">			ans = (ans + <span class="number">1l</span>l * i * fs(ll(k + <span class="number">1</span>), i) % mod) % mod;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="built_in">std</span>::min(k, n); i++)</span><br><span class="line">			ans = ans * i % mod;</span><br><span class="line">		assert(ans &gt;= <span class="number">0</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Case #%d: %I64d\n"</span>, ++q, ans);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
 	</div>
 
 	<div>
@@ -336,7 +350,24 @@ var _hmt = _hmt || [];
 (function($){
   $('.fancybox').fancybox();
 })(jQuery);
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

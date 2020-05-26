@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   <meta http-equiv="pragma" content="no-cache">
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
@@ -62,10 +62,10 @@ var _hmt = _hmt || [];
 </script>
 
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
  <body>  
-  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 		<span class="sr-only">Toggle navigation</span>
@@ -158,20 +158,23 @@ var _hmt = _hmt || [];
 	  <p>今天更新软件时又玄学死机了， Win的话就是直接重启(dog), 但Linux就能用些操作抢救一下</p>
 <p>下面记录下解决方案</p>
 <a id="more"></a>
-<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00:"></a>0x00:</h2><p>  Ctrl + Alt + F2进入终端</p>
-<p>  最方便简单的是用魔法键 Alt + SysRq + r, e, i, s, u, b， 详情可参照<a href="https://en.wikipedia.org/wiki/Magic_SysRq_key" target="_blank" rel="noopener">维基百科</a></p>
-<p>  SysRq用于发送系统请求，将输入直接交于Liunx系统内核处理</p>
-<p>  r: unRaw 将键盘从原始模式变为XLATE模式</p>
-<p>  e:tErminate 将SIGTERM发送给所有进程，请求终止</p>
-<p>  i: kill 将SIGKILL发送给所有进程，强制停止</p>
-<p>  s: Sync 将数据同步到磁盘</p>
-<p>  u: Unmount 将磁盘强制挂载为只读</p>
-<p>  b: reBoot 重启</p>
-<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01:"></a>0x01:</h2><pre><code>进入终端后，用top命令查找可能假死的进程，用kill命令结束进程。Ctrl + Alt + F1返回开启的图形桌面
-</code></pre><h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02:"></a>0x02:</h2><pre><code>进入终端后根据图形界面使用
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pkill Xorg</span><br></pre></td></tr></table></figure>
-<pre><code>或者
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo restart lightdm</span><br></pre></td></tr></table></figure>
+<h2 id="x00">0x00:</h2>
+<p>Ctrl + Alt + F2进入终端</p>
+<p>最方便简单的是用魔法键 Alt + SysRq + r, e, i, s, u, b， 详情可参照<a href="https://en.wikipedia.org/wiki/Magic_SysRq_key" target="_blank" rel="noopener">维基百科</a></p>
+<p>SysRq用于发送系统请求，将输入直接交于Liunx系统内核处理</p>
+<p>r: unRaw 将键盘从原始模式变为XLATE模式</p>
+<p>e:tErminate 将SIGTERM发送给所有进程，请求终止</p>
+<p>i: kill 将SIGKILL发送给所有进程，强制停止</p>
+<p>s: Sync 将数据同步到磁盘</p>
+<p>u: Unmount 将磁盘强制挂载为只读</p>
+<p>b: reBoot 重启</p>
+<h2 id="x01">0x01:</h2>
+<pre><code>进入终端后，用top命令查找可能假死的进程，用kill命令结束进程。Ctrl + Alt + F1返回开启的图形桌面</code></pre>
+<h2 id="x02">0x02:</h2>
+<pre><code>进入终端后根据图形界面使用</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pkill Xorg</span><br></pre></td></tr></table></figure>
+<pre><code>或者</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo restart lightdm</span><br></pre></td></tr></table></figure>
 <p>注销重新登录图形界面</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
 	</div>
@@ -338,7 +341,24 @@ var _hmt = _hmt || [];
 (function($){
   $('.fancybox').fancybox();
 })(jQuery);
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
 </script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
