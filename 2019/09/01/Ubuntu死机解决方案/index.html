@@ -158,7 +158,6 @@ var _hmt = _hmt || [];
 	  <p>今天更新软件时又玄学死机了， Win的话就是直接重启(dog), 但Linux就能用些操作抢救一下</p>
 <p>下面记录下解决方案</p>
 <a id="more"></a>
-
 <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00:"></a>0x00:</h2><p>  Ctrl + Alt + F2进入终端</p>
 <p>  最方便简单的是用魔法键 Alt + SysRq + r, e, i, s, u, b， 详情可参照<a href="https://en.wikipedia.org/wiki/Magic_SysRq_key" target="_blank" rel="noopener">维基百科</a></p>
 <p>  SysRq用于发送系统请求，将输入直接交于Liunx系统内核处理</p>
@@ -168,10 +167,11 @@ var _hmt = _hmt || [];
 <p>  s: Sync 将数据同步到磁盘</p>
 <p>  u: Unmount 将磁盘强制挂载为只读</p>
 <p>  b: reBoot 重启</p>
-<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01:"></a>0x01:</h2><pre><code>进入终端后，用top命令查找可能假死的进程，用kill命令结束进程。Ctrl + Alt + F1返回开启的图形桌面</code></pre><h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02:"></a>0x02:</h2><pre><code>进入终端后根据图形界面使用</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pkill Xorg</span><br></pre></td></tr></table></figure>
-
-<pre><code>或者</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo restart lightdm</span><br></pre></td></tr></table></figure>
-
+<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01:"></a>0x01:</h2><pre><code>进入终端后，用top命令查找可能假死的进程，用kill命令结束进程。Ctrl + Alt + F1返回开启的图形桌面
+</code></pre><h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02:"></a>0x02:</h2><pre><code>进入终端后根据图形界面使用
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pkill Xorg</span><br></pre></td></tr></table></figure>
+<pre><code>或者
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo restart lightdm</span><br></pre></td></tr></table></figure>
 <p>注销重新登录图形界面</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
 	</div>
